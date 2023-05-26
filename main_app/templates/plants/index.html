@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link 
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/plants/plant-index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>Plant List</h1>
+  <img src="{% static 'images/plant1.jpg' %}" alt="A plant" />
+  <img src="{% static 'images/plant2.jpg' %}" alt="Another plant" />
+  <img src="{% static 'images/plant3.jpg' %}" alt="Some other plant" />
+  <img src="{% static 'images/plant4.jpg' %}" alt="Yet another plant" />
+</section>
+
+<section class="card-container">
+  {% for plant in plants %}
+    <div class="card">
+      <div class="card-content">
+        <div class="card-img-container">
+          <img 
+            src="{% static 'images/plant5.jpg' %}" 
+            alt="Another plant"
+          >
+        </div>
+        <h2 class="card-title">{{ plant.name }}</h2>
+        {% if plant.alive %}
+          <p>An alive {{ plant.type }} that has {{ plant.water_needs }} water needs and {{ plant.sun_needs }} sun needs</p>
+        {% else %}
+          <p>A dead {{ plant.type }} that had {{ plant.water_needs }} water needs and {{ plant.sun_needs }} sun needs</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
