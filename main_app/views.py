@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 class Plant:  # Note that parens are optional if not inheriting from another class
   def __init__(self, name, type, water_needs, sun_needs, alive):
@@ -18,7 +17,7 @@ plants = [
 
 # Define the home view
 def home(request):
-  return HttpResponse('<h1>Hello 🌻🪴🌵</h1>')
+  return render(request, 'home.html')
 
 def about(request):
   return render(request, 'about.html')

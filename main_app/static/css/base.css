@@ -17,6 +17,17 @@ html {
   font-size: 62.5%
 }
 
+/* #77c424
+#70b529
+#6aa62b
+#619530
+#5b8934 
+
+#15aeb6
+#2bb2b9
+#6dc6cb
+#c7e9ea */
+
 body {
   margin: 0;
   display: flex;
@@ -26,9 +37,10 @@ body {
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 
     'Helvetica Neue', sans-serif;
   min-height: 100vh;
-  --nav-bg: rgba(104, 197, 248, .7);
-  --nav-bg-ff: rgba(104, 197, 248, .9);
-  --borders: rgb(36, 116, 248) solid 2px;
+  /* --nav-bg: rgba(104, 197, 248, .7); */
+  /* --nav-bg-ff: rgba(104, 197, 248, .9); */
+  --nav-bg: #77c424;
+  --borders: #77c424 solid 2px;
   --text-color: rgb(17, 20, 17);
   --link-hover-color: rgb(16, 56, 158);
   --button-bg: rgb(245, 245, 245);
@@ -48,12 +60,15 @@ body {
 
 header {
   width: 100%;
-  background: var(--nav-bg-ff); /* rgba(104, 197, 248, .9) */
-  border-bottom: var(--borders);
+  /* background: var(--nav-bg-ff); */
+  /* border-bottom: var(--borders); */
 }
 
 nav {
   margin: 10px;
+    background: var(--nav-bg);
+    border: var(--borders);
+    border-radius: 18px;
 }
 
 ul {
@@ -201,7 +216,9 @@ nav li {
   }
 
   .header-logo-container img {
-    max-width: 100%;
+    position: absolute;
+    max-width: 90%;
+
   }
 
   .page-header h1 {
@@ -243,9 +260,9 @@ nav li {
   nav,
   .header-logo-container {
     margin: 0;
-    background: var(--nav-bg-ff);
-    border: var(--borders);
-    border-radius: 18px;
+    /* background: var(--nav-bg-ff); */
+    /* border: var(--borders); */
+    /* border-radius: 18px; */
   }
 
   nav {
@@ -267,7 +284,7 @@ nav li {
 
     nav,
     .header-logo-container {
-      background: rgba(104, 197, 248, .6);
+      /* background: var(--nav-bg); */
       -webkit-backdrop-filter: blur(3px);
       backdrop-filter: blur(3px);
     }
