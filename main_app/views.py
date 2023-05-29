@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Plant
+from .forms import WateringForm
 
 # class Plant:  # Note that parens are optional if not inheriting from another class
 #   def __init__(self, name, type, water_needs, sun_needs, alive):
@@ -30,7 +31,11 @@ def plant_index(request):
 
 def plant_detail(request, plant_id):
   plant = Plant.objects.get(id=plant_id)
-  return render(request, 'plants/detail.html', {'plant': plant})
+  watering_form= WateringForm()
+  return render(request, 'plants/detail.html', {
+    'plant': plant,
+    'watering_form': watering_form,
+  })
 
 class PlantCreate(CreateView):
   model = Plant
