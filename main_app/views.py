@@ -35,3 +35,4 @@ def plant_detail(request, plant_id):
 class PlantCreate(CreateView):
   model = Plant
   fields = '__all__'
+  success_url = '/plants/'
