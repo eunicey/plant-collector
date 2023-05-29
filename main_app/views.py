@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Plant
 
 # class Plant:  # Note that parens are optional if not inheriting from another class
@@ -35,4 +35,12 @@ def plant_detail(request, plant_id):
 class PlantCreate(CreateView):
   model = Plant
   fields = '__all__'
+  success_url = '/plants/'
+
+class PlantUpdate(UpdateView):
+  model = Plant
+  fields = ['type', 'water_needs', 'sun_needs', 'alive']
+
+class PlantDelete(DeleteView):
+  model = Plant
   success_url = '/plants/'

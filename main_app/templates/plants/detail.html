@@ -25,6 +25,10 @@
     {% else %}
       <p>A dead {{ plant.type }} that had {{ plant.water_needs }} water needs and {{ plant.sun_needs }} sun needs</p>
     {% endif %}
+    <div class="plant-actions">
+      <a href="{% url 'plant-update' plant.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'plant-delete' plant.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 
