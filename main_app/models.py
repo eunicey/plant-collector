@@ -41,3 +41,7 @@ class Watering(models.Model):
 
   def __str__(self):
     return f"{self.plant} - {self.date}"
+  
+  # change the default sort
+  class Meta:
+    ordering = ['-date']
