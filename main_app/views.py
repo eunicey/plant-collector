@@ -31,6 +31,7 @@ def plant_index(request):
 
 def plant_detail(request, plant_id):
   plant = Plant.objects.get(id=plant_id)
+  print('HERE ===>', plant.watered())
   watering_form= WateringForm()
   return render(request, 'plants/detail.html', {
     'plant': plant,
