@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date, timedelta
+from datetime import date
 
 SUNLIGHT = (
   ('L', 'Low'),
@@ -12,12 +12,6 @@ WATER = (
   ('L', 'Low (every 2 weeks)'),
   ('M', 'Moderate (every week)'),
   ('H', 'High (2 times a week)'),
-)
-
-EXTRA_CARE = (
-  ('R', 'Repot'),
-  ('F', 'Fertilize'),
-  ('P', 'Remove Pests'),
 )
 
 # Create your models here.
@@ -50,22 +44,18 @@ class Watering(models.Model):
   plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
 
   def __str__(self):
-    # return f"{self.plant} - {self.date}"
-    return self.date
+    return f"{self.plant} - {self.date}"
   
   # change the default sort
   class Meta:
     ordering = ['-date']
 
-class ExtraCare(models.Model):
-  action = models.CharField(
-    max_length=1,
-    choices=EXTRA_CARE,
-    default=EXTRA_CARE[1][0],
-  )
+class Pot(models.Model):
+  size = models.CharField('size(in)', max_length=10)
+  color = models.CharField(max_length=20)
 
   def __str__(self):
-    return self.action
+    return self.size
   
   def get_absolute_url(self):
-    return reverse('extra_detail', kwargs={"pk": self.id})
+    return reverse('pot_detail', kwargs={"pk": self.id})

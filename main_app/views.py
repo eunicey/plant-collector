@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Plant
+from .models import Plant, Pot
 from .forms import WateringForm
 
 # class Plant:  # Note that parens are optional if not inheriting from another class
@@ -58,3 +58,7 @@ class PlantUpdate(UpdateView):
 class PlantDelete(DeleteView):
   model = Plant
   success_url = '/plants/'
+
+class PotCreate(CreateView):
+  model = Pot
+  fields = '__all__'
