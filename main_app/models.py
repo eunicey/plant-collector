@@ -14,6 +14,12 @@ WATER = (
   ('H', 'High (2 times a week)'),
 )
 
+EXTRA_CARE = (
+  ('R', 'Repot'),
+  ('F', 'Fertilize'),
+  ('P', 'Remove Pests'),
+)
+
 # Create your models here.
 class Plant(models.Model):
   name = models.CharField(max_length=200)
@@ -50,3 +56,16 @@ class Watering(models.Model):
   # change the default sort
   class Meta:
     ordering = ['-date']
+
+class ExtraCare(models.Model):
+  action = models.CharField(
+    max_length=1,
+    choices=EXTRA_CARE,
+    default=EXTRA_CARE[1][0],
+  )
+
+  def __str__(self):
+    return self.action
+  
+  def get_absolute_url(self):
+    return reverse('extra_detail', kwargs={"pk": self.id})
