@@ -7,7 +7,7 @@ html {
 *::before, /* All ::before pseudo-elements */
 *::after { /* All ::after pseudo-elements */
   /* height & width will now include border & padding by default
-     but can be over-ridden as needed */
+     but can be ovaer-ridden as needed */
   box-sizing: inherit;
 }
 
@@ -114,6 +114,11 @@ nav li {
   max-width: 500px;
 }
 
+.header-logo-container img {
+  /* position: absolute; */
+  max-width: 90%;
+}
+
 .page-header {
   display: flex;
   align-items: center;
@@ -194,6 +199,8 @@ nav li {
   .header-logo-container {
     margin: 10px 0;
     padding: 0 15px;
+    border: var(--borders);
+    border-radius: 18px;
   }
 
   /* visual fix to help align logo */
@@ -215,12 +222,6 @@ nav li {
     width: 213px;
   }
 
-  .header-logo-container img {
-    position: absolute;
-    max-width: 90%;
-
-  }
-
   .page-header h1 {
     font-size: var(--font-xtreme);
   }
@@ -236,7 +237,7 @@ nav li {
 
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
     header {
-      background: var(--nav-bg);
+      /* background: var(--nav-bg); */
       -webkit-backdrop-filter: blur(3px);
       backdrop-filter: blur(3px);
     }
@@ -261,8 +262,8 @@ nav li {
   .header-logo-container {
     margin: 0;
     /* background: var(--nav-bg-ff); */
-    /* border: var(--borders); */
-    /* border-radius: 18px; */
+    border: var(--borders);
+    border-radius: 18px;
   }
 
   nav {
