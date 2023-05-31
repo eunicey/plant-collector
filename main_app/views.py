@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Plant, Pot
 from .forms import WateringForm
@@ -62,3 +63,17 @@ class PlantDelete(DeleteView):
 class PotCreate(CreateView):
   model = Pot
   fields = '__all__'
+
+class PotList(ListView):
+  model = Pot
+
+class PotDetail(DetailView):
+  model = Pot
+
+class PotUpdate(UpdateView):
+  model = Pot
+  fields = ['size', 'color']
+
+class PotDelete(DeleteView):
+  model = Pot
+  success_url = '/pots/'

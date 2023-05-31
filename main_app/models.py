@@ -58,4 +58,4 @@ class Pot(models.Model):
     return self.size
   
   def get_absolute_url(self):
-    return reverse('pot_detail', kwargs={"pk": self.id})
+    return reverse('pot-detail', kwargs={"pk": self.id})

@@ -28,7 +28,7 @@
   margin-top: 20px;
 }
 
-.watering-toy-container {
+.watering-pot-container {
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
@@ -45,7 +45,7 @@
   margin: 0 8px;
 }
 
-.toy-container {
+.pot-container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -60,19 +60,19 @@
 
 .unfed,
 .fed,
-.no-toys,
-.all-toys {
+.no-pots,
+.all-pots {
   margin: 0;
   font-weight: bold;
 }
 
 .unfed,
-.no-toys {
+.no-pots {
   color: var(--danger);
 }
 
 .fed,
-.all-toys {
+.all-pots {
   color: var(--submit);
 }
 
@@ -98,7 +98,7 @@
   margin: 5px 0;
 }
 
-.watering-toy-container > section {
+.watering-pot-container > section {
   width: 80%;
   min-width: 360px;
   border: var(--borders);
@@ -121,13 +121,13 @@
 }
 
 .watering h2,
-.toys h2 {
+.pots h2 {
   font-size: 3.2rem;
   margin: 0;
 }
 
 .watering h3,
-.toys h3 {
+.pots h3 {
   font-size: var(--font-xl);
   margin: 10px 0;
 }
@@ -166,16 +166,16 @@
   background-color: #f3f3fd;
 }
 
-.toy-container p {
+.pot-container p {
   margin: 12px 0;
 }
 
-.toy-container a {
+.pot-container a {
   text-decoration: none;
   color: #111;
 }
 
-.toy-container .btn {
+.pot-container .btn {
   padding: 3px 10px;
   margin-left: 10px;
 }
@@ -205,19 +205,19 @@
     margin-right: 25px;
   }
 
-  .watering-toy-container {
+  .watering-pot-container {
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
   }
 
-  .watering-toy-container > section {
+  .watering-pot-container > section {
     width: 45%;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .watering-toy-container {
+  .watering-pot-container {
     padding: 0 40px;
   }
 }
