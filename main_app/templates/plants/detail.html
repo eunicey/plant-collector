@@ -69,13 +69,10 @@
       method="post" 
       class="subsection-content"
     >
-      {{plant.watered}}
-      {% if plant.watered == 1 %}
-        <p class="watered">{{plant.name}} has been watered already!</p>
-      {% elif plant.watered > 1%}
-        <p class="overwatered">{{plant.name}} is overwatered!</p>
+      {% if plant.watered_today %}
+        <p class="watered">{{plant.name}} has already been watered today!</p>
       {% else %}
-        <p class="underwatered">{{plant.name}} is thirsty!</p>
+        <p class="unwatered">{{plant.name}} might be thirsty!</p>
       {% endif %}
 
       {% csrf_token %}
