@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/soils/soil-index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>All Plant Soils</h1>
+  <img src="{% static 'images/plant1.jpg' %}" alt="A plant" />
+  <img src="{% static 'images/plant1.jpg' %}" alt="A plant" />
+  <img src="{% static 'images/plant1.jpg' %}" alt="A plant" />
+  <img src="{% static 'images/plant1.jpg' %}" alt="A plant" />
+</section>
+
+<section class="card-container">
+  {% for soil in soil_list %}
+  <div class="card" style="border-color: brown">
+    <div class="card-bg" style="background-color: brown"></div>
+    <a href="{% url 'soil-detail' soil.id %}">
+      <div class="card-content">
+        <h2>{{ soil.mixture }}</h2>
+        <p>{{ soil.get_type_display }} soil</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

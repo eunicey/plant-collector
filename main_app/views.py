@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Plant, Pot
+from .models import Plant, Soil
 from .forms import WateringForm
 
 # class Plant:  # Note that parens are optional if not inheriting from another class
@@ -32,13 +32,13 @@ def plant_index(request):
 
 def plant_detail(request, plant_id):
   plant = Plant.objects.get(id=plant_id)
-  pots_plant_doesnt_have = Pot.objects.exclude(id__in = plant.pots.all().values_list('id'))
+  soils_plant_doesnt_have = Soil.objects.exclude(id__in = plant.soils.all().values_list('id'))
 
   watering_form= WateringForm()
   return render(request, 'plants/detail.html', {
     'plant': plant,
     'watering_form': watering_form,
-    'pots': pots_plant_doesnt_have
+    'soils': soils_plant_doesnt_have
   })
 
 def add_watering(request, plant_id):
@@ -62,24 +62,24 @@ class PlantDelete(DeleteView):
   model = Plant
   success_url = '/plants/'
 
-class PotCreate(CreateView):
-  model = Pot
+class SoilCreate(CreateView):
+  model = Soil
   fields = '__all__'
 
-class PotList(ListView):
-  model = Pot
+class SoilList(ListView):
+  model = Soil
 
-class PotDetail(DetailView):
-  model = Pot
+class SoilDetail(DetailView):
+  model = Soil
 
-class PotUpdate(UpdateView):
-  model = Pot
-  fields = ['size', 'color']
+class SoilUpdate(UpdateView):
+  model = Soil
+  fields = ['type', 'mixture']
 
-class PotDelete(DeleteView):
-  model = Pot
-  success_url = '/pots/'
+class SoilDelete(DeleteView):
+  model = Soil
+  success_url = '/soils/'
 
-def assoc_pot(request, plant_id, pot_id):
-  Plant.objects.get(id=plant_id).pots.add(pot_id)
+def assoc_soil(request, plant_id, soil_id):
+  Plant.objects.get(id=plant_id).soils.add(soil_id)
   return redirect('plant-detail', plant_id=plant_id)

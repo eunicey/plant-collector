@@ -28,7 +28,7 @@
   margin-top: 20px;
 }
 
-.watering-pot-container {
+.watering-soil-container {
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
@@ -45,7 +45,7 @@
   margin: 0 8px;
 }
 
-.pot-container {
+.soil-container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -60,19 +60,19 @@
 
 .unfed,
 .fed,
-.no-pots,
-.all-pots {
+.no-soils,
+.all-soils {
   margin: 0;
   font-weight: bold;
 }
 
 .unfed,
-.no-pots {
+.no-soils {
   color: var(--danger);
 }
 
 .fed,
-.all-pots {
+.all-soils {
   color: var(--submit);
 }
 
@@ -98,7 +98,7 @@
   margin: 5px 0;
 }
 
-.watering-pot-container > section {
+.watering-soil-container > section {
   width: 80%;
   min-width: 360px;
   border: var(--borders);
@@ -121,13 +121,13 @@
 }
 
 .watering h2,
-.pots h2 {
+.soils h2 {
   font-size: 3.2rem;
   margin: 0;
 }
 
 .watering h3,
-.pots h3 {
+.soils h3 {
   font-size: var(--font-xl);
   margin: 10px 0;
 }
@@ -166,16 +166,16 @@
   background-color: #f3f3fd;
 }
 
-.pot-container p {
+.soil-container p {
   margin: 12px 0;
 }
 
-.pot-container a {
+.soil-container a {
   text-decoration: none;
   color: #111;
 }
 
-.pot-container .btn {
+.soil-container .btn {
   padding: 3px 10px;
   margin-left: 10px;
 }
@@ -205,19 +205,19 @@
     margin-right: 25px;
   }
 
-  .watering-pot-container {
+  .watering-soil-container {
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
   }
 
-  .watering-pot-container > section {
+  .watering-soil-container > section {
     width: 45%;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .watering-pot-container {
+  .watering-soil-container {
     padding: 0 40px;
   }
 }

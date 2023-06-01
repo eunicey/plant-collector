@@ -32,9 +32,9 @@
   <div class="plant-details">
     <h1>{{ plant.name }}</h1>
     {% if plant.alive %}
-      <p>An alive {{ plant.type }} that has {{ plant.water_needs }} water needs and {{ plant.sun_needs }} sun needs</p>
+      <p>🌷 {{ plant.type }} that needs {{ plant.get_water_needs_display }} watering and {{ plant.get_sun_needs_display }} sunlight</p>
     {% else %}
-      <p>A dead {{ plant.type }} that had {{ plant.water_needs }} water needs and {{ plant.sun_needs }} sun needs</p>
+      <p>🥀 {{ plant.type }} that needed {{ plant.get_water_needs_display }} watering and {{ plant.get_sun_needs_display }} sunlight</p>
     {% endif %}
 
     <div class="plant-actions">
@@ -44,11 +44,11 @@
   </div>
 </section>
 
-<div class="watering-pot-container">
+<div class="watering-soil-container">
   <section class="watering">
 
     <div class="subsection-title">
-      <h2>Watering</h2>
+      <h2>Waterings</h2>
       <img 
         src="{% static 'images/plant3.jpg' %}" 
         alt="A plant"
@@ -78,7 +78,7 @@
 
       {% csrf_token %}
       {{ watering_form.as_p }}
-      <button type="submit" class="btn submit">Add Watering</button>
+      <button type="submit" class="btn submit">Add Date</button>
     </form>
 
     <h3>Past Waterings</h3>
@@ -103,52 +103,53 @@
 
   </section>
 
-  <section class="pots">
+  <section class="soils">
     <div class="subsection-title">
-      <h2>Pots</h2>
+      <h2>Soil</h2>
       <img src="{% static 'images/plant2.jpg' %}" alt="A plant" />
       <img src="{% static 'images/plant3.jpg' %}" alt="A plant" />
       <img src="{% static 'images/plant4.jpg' %}" alt="A plant" />
     </div>
-    <h3>{{ plant.name }}'s Pots</h3>
+    <h3>{{ plant.name }}'s Soil</h3>
     <div class="subsection-content">
-      {% if plant.pots.count %}
-        {% for pot in plant.pots.all %}
-          <div class="pot-container">
+      {% if plant.soils.count %}
+        {% for soil in plant.soils.all %}
+          <div class="soil-container">
             <div 
               class="color-block"
-              style="background-color: {{ pot.color }}"
+              style="background-color: brown"
             ></div>
-            <a href="{% url 'pot-detail' pot.id %}">
-              <p>A {{ pot.size }} inch {{ pot.color }} pot</p>
+            <a href="{% url 'soil-detail' soil.id %}">
+              <p> {{ soil.mixture }} mixture ({{ soil.get_type_display }} soil)</p>
             </a>
           </div>
         {% endfor %}
       {% else %}
-        <p class="no-pots">{{plant.name}} doesn't have any pots 😞</p>
+        <p class="no-soils">{{plant.name}} needs the good stuff! </p>
       {% endif %}
     </div>
-    <h3>Available Pots</h3>
+
+    <h3>Available Soil Mixtures</h3>
     <div class="subsection-content">
-      {% if pots.count %}
-        {% for pot in pots.all %}
-          <div class="pot-container">
+      {% if soils.count %}
+        {% for soil in soils.all %}
+          <div class="soil-container">
             <div 
               class="color-block"
-              style="background-color: {{ pot.color }}"
+              style="background-color: brown"
             ></div>
-            <a href="{% url 'pot-detail' pot.id %}">
-              <p>A {{ pot.color }} {{ pot.size }} inch pot</p>
+            <a href="{% url 'soil-detail' soil.id %}">
+              <p>{{ soil.mixture }} mixture ({{ soil.get_type_display }} soil)</p>
             </a>
-            <form action="{% url 'assoc-pot' plant.id pot.id %}" method="post">
+            <form action="{% url 'assoc-soil' plant.id soil.id %}" method="post">
               {% csrf_token %}
-              <button type="submit" class="btn submit">Give pot</button>
+              <button type="submit" class="btn submit">Add soil</button>
             </form>
           </div>
         {% endfor %}
       {% else %}
-        <p class="all-pots">
-          {{plant.name}} already has all the available pots 🥳
+        <p class="all-soils">
+          {{plant.name}} has all the available soil mixtures 🥳
         </p>
       {% endif %}
     </div>

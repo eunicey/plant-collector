@@ -32,9 +32,9 @@
           </div>
           <h2 class="card-title">{{ plant.name }}</h2>
           {% if plant.alive %}
-            <p>An alive {{ plant.type }} that has {{ plant.water_needs }} water needs and {{ plant.sun_needs }} sun needs</p>
+            <p>🌷 {{ plant.type }} that needs {{ plant.get_water_needs_display }} watering and {{ plant.get_sun_needs_display }} sunlight</p>
           {% else %}
-            <p>A dead {{ plant.type }} that had {{ plant.water_needs }} water needs and {{ plant.sun_needs }} sun needs</p>
+            <p>🥀 {{ plant.type }} that needed {{ plant.get_water_needs_display }} watering and {{ plant.get_sun_needs_display }} sunlight</p>
           {% endif %}
         </div>
       </a>

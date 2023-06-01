@@ -3,33 +3,44 @@ from django.urls import reverse
 from datetime import date
 
 SUNLIGHT = (
-  ('L', 'Low'),
-  ('M', 'Moderate'),
-  ('B', 'Bright'),
+  ('L', 'low'),
+  ('M', 'moderate'),
+  ('B', 'bright'),
 )
 
 WATER = (
-  ('L', 'Low (every 2 weeks)'),
-  ('M', 'Moderate (every week)'),
-  ('H', 'High (2 times a week)'),
+  ('I', 'infrequent'),
+  ('R', 'regular'),
+  ('F', 'frequent'),
 )
 
-# Create your models here.
-class Pot(models.Model):
-  size = models.CharField('size(in)', max_length=10)
-  color = models.CharField(max_length=20)
+SOIL_TYPE = (
+  ('I', 'Indoor'),
+  ('O', 'Outdoor/Garden')
+)
 
+
+class Soil(models.Model):
+  type = models.CharField(
+    'Soil Mixture Type',
+    max_length=1,
+    choices=SOIL_TYPE,
+    default=SOIL_TYPE[0][0]
+  )
+  mixture = models.CharField('Soil Composition and Additives', max_length=100)
+  
   def __str__(self):
-    return self.size
+    return f"{self.type} - {self.mixture}"
   
   def get_absolute_url(self):
-    return reverse('pot-detail', kwargs={"pk": self.id})
+    return reverse('soil-detail', kwargs={"pk": self.id})
 
 
 class Plant(models.Model):
   name = models.CharField(max_length=200)
   type = models.CharField(max_length=100)
   water_needs = models.CharField(
+    'Watering Needs',
     max_length=1,
     choices=WATER,
     default=WATER[1][0],
@@ -39,8 +50,8 @@ class Plant(models.Model):
     choices=SUNLIGHT,
     default=SUNLIGHT[1][0],
   )
-  alive = models.BooleanField('still alive?', default=True)
-  pots = models.ManyToManyField(Pot)
+  alive = models.BooleanField('Still Alive?', default=True)
+  soils = models.ManyToManyField(Soil)
 
   def __str__(self):
     return f"{self.name} - {self.type}"
@@ -51,6 +62,7 @@ class Plant(models.Model):
   def watered_today(self):
     return self.watering_set.filter(date=date.today()).count() >= 1
 
+
 class Watering(models.Model):
   date = models.DateField('Watering date')
   plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
@@ -58,6 +70,5 @@ class Watering(models.Model):
   def __str__(self):
     return f"{self.plant} - {self.date}"
   
-  # change the default sort
   class Meta:
     ordering = ['-date']
