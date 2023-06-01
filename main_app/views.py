@@ -4,6 +4,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .models import Plant, Soil
 from .forms import WateringForm
 
@@ -13,10 +16,12 @@ class Home(LoginView):
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def plant_index(request):
-  plants = Plant.objects.all()
+  plants = Plant.objects.filter(user=request.user)
   return render(request, 'plants/index.html', {'plants': plants})
 
+@login_required
 def plant_detail(request, plant_id):
   plant = Plant.objects.get(id=plant_id)
   soils_plant_doesnt_have = Soil.objects.exclude(id__in = plant.soils.all().values_list('id'))
@@ -28,6 +33,7 @@ def plant_detail(request, plant_id):
     'soils': soils_plant_doesnt_have
   })
 
+@login_required
 def add_watering(request, plant_id):
   form = WateringForm(request.POST)
   if form.is_valid():
@@ -36,7 +42,12 @@ def add_watering(request, plant_id):
       new_watering.save()
   return redirect('plant-detail', plant_id=plant_id)
 
-class PlantCreate(CreateView):
+@login_required
+def assoc_soil(request, plant_id, soil_id):
+  Plant.objects.get(id=plant_id).soils.add(soil_id)
+  return redirect('plant-detail', plant_id=plant_id)
+
+class PlantCreate(LoginRequiredMixin, CreateView):
   model = Plant
   fields = ['name', 'type', 'water_needs', 'sun_needs', 'alive']
 
@@ -44,35 +55,31 @@ class PlantCreate(CreateView):
     form.instance.user = self.request.user 
     return super().form_valid(form)
 
-class PlantUpdate(UpdateView):
+class PlantUpdate(LoginRequiredMixin, UpdateView):
   model = Plant
   fields = ['type', 'water_needs', 'sun_needs', 'alive']
 
-class PlantDelete(DeleteView):
+class PlantDelete(LoginRequiredMixin, DeleteView):
   model = Plant
   success_url = '/plants/'
 
-class SoilCreate(CreateView):
+class SoilCreate(LoginRequiredMixin, CreateView):
   model = Soil
   fields = '__all__'
 
-class SoilList(ListView):
+class SoilList(LoginRequiredMixin, ListView):
   model = Soil
 
-class SoilDetail(DetailView):
+class SoilDetail(LoginRequiredMixin, DetailView):
   model = Soil
 
-class SoilUpdate(UpdateView):
+class SoilUpdate(LoginRequiredMixin, UpdateView):
   model = Soil
   fields = ['type', 'mixture']
 
-class SoilDelete(DeleteView):
+class SoilDelete(LoginRequiredMixin, DeleteView):
   model = Soil
   success_url = '/soils/'
-
-def assoc_soil(request, plant_id, soil_id):
-  Plant.objects.get(id=plant_id).soils.add(soil_id)
-  return redirect('plant-detail', plant_id=plant_id)
 
 def signup(request):
   error_message = ''
