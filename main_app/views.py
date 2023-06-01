@@ -37,7 +37,10 @@ def add_watering(request, plant_id):
 class PlantCreate(CreateView):
   model = Plant
   fields = ['name', 'type', 'water_needs', 'sun_needs', 'alive']
-  success_url = '/plants/'
+  
+  def form_valid(self, form):
+    form.instance.user = self.request.user 
+    return super().form_valid(form)
 
 class PlantUpdate(UpdateView):
   model = Plant
