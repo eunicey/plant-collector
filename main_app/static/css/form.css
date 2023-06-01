@@ -33,6 +33,11 @@ td > textarea {
   font-family: inherit;
 }
 
+td > #id_alive {
+  width: 16px;
+  height: 16px;
+}
+
 .btn {
   align-self: flex-end;
   margin-right: 40px;

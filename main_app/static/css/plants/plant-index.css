@@ -40,3 +40,7 @@
 .card img {
   max-width: 100%;
 }
+
+.card-img-container.dead-plant img{
+  opacity: 0.4;
+}

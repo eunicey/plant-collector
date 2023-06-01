@@ -49,7 +49,7 @@ def assoc_soil(request, plant_id, soil_id):
 
 class PlantCreate(LoginRequiredMixin, CreateView):
   model = Plant
-  fields = ['name', 'type', 'water_needs', 'sun_needs', 'alive']
+  fields = ['name', 'size', 'water_needs', 'sun_needs', 'alive']
 
   def form_valid(self, form):
     form.instance.user = self.request.user 
@@ -57,7 +57,7 @@ class PlantCreate(LoginRequiredMixin, CreateView):
 
 class PlantUpdate(LoginRequiredMixin, UpdateView):
   model = Plant
-  fields = ['type', 'water_needs', 'sun_needs', 'alive']
+  fields = ['size', 'water_needs', 'sun_needs', 'alive']
 
 class PlantDelete(LoginRequiredMixin, DeleteView):
   model = Plant

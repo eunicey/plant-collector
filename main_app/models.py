@@ -3,6 +3,12 @@ from django.urls import reverse
 from datetime import date
 from django.contrib.auth.models import User
 
+PLANT_SIZE = (
+  ('S', 'small'),
+  ('M', 'medium'),
+  ('L', 'large'),
+)
+
 SUNLIGHT = (
   ('L', 'low'),
   ('M', 'moderate'),
@@ -17,9 +23,8 @@ WATER = (
 
 SOIL_TYPE = (
   ('I', 'Indoor'),
-  ('O', 'Outdoor/Garden')
+  ('O', 'Outdoor')
 )
-
 
 class Soil(models.Model):
   type = models.CharField(
@@ -39,7 +44,11 @@ class Soil(models.Model):
 
 class Plant(models.Model):
   name = models.CharField(max_length=200)
-  type = models.CharField(max_length=100)
+  size = models.CharField(
+    max_length=1,
+    choices=PLANT_SIZE,
+    default=PLANT_SIZE[0][0],
+  )
   water_needs = models.CharField(
     'Watering Needs',
     max_length=1,
@@ -56,7 +65,7 @@ class Plant(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f"{self.name} - {self.type}"
+    return self.name
   
   def get_absolute_url(self):
     return reverse("plant-detail", kwargs={"plant_id": self.id})

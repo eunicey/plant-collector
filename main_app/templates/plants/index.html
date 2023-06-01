@@ -13,7 +13,7 @@
 
 <section class="page-header">
   <h1>Plant List</h1>
-  <img src="{% static 'images/plants_4.png' %}" alt="Four different house plants" />
+  <img src="{% static 'images/four-plants.png' %}" alt="Four different house plants" />
 </section>
 
 <section class="card-container">
@@ -21,17 +21,19 @@
     <div class="card">
       <a href="{% url 'plant-detail' plant.id %}">
         <div class="card-content">
-          <div class="card-img-container">
-            <img 
-              src="{% static 'images/plant5.jpg' %}" 
-              alt="Another plant"
+          <div class="card-img-container {% if not plant.alive %}dead-plant{% endif %}">
+            <img
+              src="{% static 'images/'%}{{plant.get_size_display}}-plant.png" 
+              alt="A {{plant.get_size_display}} plant"
             >
           </div>
-          <h2 class="card-title">{{ plant.name }}</h2>
+        
           {% if plant.alive %}
-            <p>🌷 {{ plant.type }} that needs {{ plant.get_water_needs_display }} watering and {{ plant.get_sun_needs_display }} sunlight</p>
+            <h2 class="card-title">{{ plant.name }} </h2>
+            <p>A {{ plant.get_size_display }} plant that needs {{ plant.get_water_needs_display }} 💦 and {{ plant.get_sun_needs_display }} ☀️</p>
           {% else %}
-            <p>🥀 {{ plant.type }} that needed {{ plant.get_water_needs_display }} watering and {{ plant.get_sun_needs_display }} sunlight</p>
+            <h2 class="card-title">{{ plant.name }} 🪦 </h2>
+            <p>A {{ plant.get_size_display }} plant that needed {{ plant.get_water_needs_display }} 💦 and {{ plant.get_sun_needs_display }} ☀️</p>
           {% endif %}
         </div>
       </a>

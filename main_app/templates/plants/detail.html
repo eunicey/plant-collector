@@ -21,20 +21,21 @@
 
 {% block content %}
 
-<section class="plant-container">
+<section class="plant-container {% if not plant.alive %}dead-plant{% endif %}">
   <div class="plant-img">
-    <img 
-      src="{% static 'images/plant5.jpg' %}" 
-      alt="A plant"
+    <img
+      src="{% static 'images/'%}{{plant.get_size_display}}-plant.png" 
+      alt="A {{plant.get_size_display}} plant"
     >
   </div>
 
   <div class="plant-details">
-    <h1>{{ plant.name }}</h1>
     {% if plant.alive %}
-      <p>🌷 {{ plant.type }} that needs {{ plant.get_water_needs_display }} watering and {{ plant.get_sun_needs_display }} sunlight</p>
+      <h1> {{ plant.name }} </h2>
+      <p>A {{ plant.get_size_display }} plant that needs {{ plant.get_water_needs_display }} 💦 and {{ plant.get_sun_needs_display }} ☀️</p>
     {% else %}
-      <p>🥀 {{ plant.type }} that needed {{ plant.get_water_needs_display }} watering and {{ plant.get_sun_needs_display }} sunlight</p>
+      <h1> {{ plant.name }} 🪦 </h2>
+      <p>A {{ plant.get_size_display }} plant that needed {{ plant.get_water_needs_display }} 💦 and {{ plant.get_sun_needs_display }} ☀️</p>
     {% endif %}
 
     <div class="plant-actions">
@@ -49,7 +50,7 @@
 
     <div class="subsection-title">
       <h2>Waterings</h2>
-      <img src="{% static 'images/watering_plant.png' %}" alt="A plant being watered"/>
+      <img src="{% static 'images/watering-plant.png' %}" alt="A plant being watered"/>
     </div>
 
     <h3>Add a Watering</h3>
@@ -95,7 +96,7 @@
   <section class="soils">
     <div class="subsection-title">
       <h2>Soil</h2>
-      <img src="{% static 'images/grouped_plants_in_soil.png' %}" alt="Three plants in soil" />
+      <img src="{% static 'images/grouped-plants-in-soil.png' %}" alt="Three plants in soil" />
     </div>
     <h3>{{ plant.name }}'s Soil</h3>
     <div class="subsection-content">

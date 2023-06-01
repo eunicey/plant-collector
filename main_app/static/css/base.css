@@ -17,17 +17,6 @@ html {
   font-size: 62.5%
 }
 
-/* #77c424
-#70b529
-#6aa62b
-#619530
-#5b8934 
-
-#15aeb6
-#2bb2b9
-#6dc6cb
-#c7e9ea */
-
 body {
   margin: 0;
   display: flex;
@@ -37,8 +26,6 @@ body {
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 
     'Helvetica Neue', sans-serif;
   min-height: 100vh;
-  /* --nav-bg: rgba(104, 197, 248, .7); */
-  /* --nav-bg-ff: rgba(104, 197, 248, .9); */
   --nav-bg: #77c424;
   --borders: #77c424 solid 2px;
   --text-color: rgb(17, 20, 17);
@@ -60,8 +47,6 @@ body {
 
 header {
   width: 100%;
-  /* background: var(--nav-bg-ff); */
-  /* border-bottom: var(--borders); */
 }
 
 nav {
