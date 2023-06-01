@@ -15,6 +15,17 @@ WATER = (
 )
 
 # Create your models here.
+class Pot(models.Model):
+  size = models.CharField('size(in)', max_length=10)
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.size
+  
+  def get_absolute_url(self):
+    return reverse('pot-detail', kwargs={"pk": self.id})
+
+
 class Plant(models.Model):
   name = models.CharField(max_length=200)
   type = models.CharField(max_length=100)
@@ -28,7 +39,8 @@ class Plant(models.Model):
     choices=SUNLIGHT,
     default=SUNLIGHT[1][0],
   )
-  alive = models.BooleanField(default=True)
+  alive = models.BooleanField('still alive?', default=True)
+  pots = models.ManyToManyField(Pot)
 
   def __str__(self):
     return f"{self.name} - {self.type}"
@@ -49,13 +61,3 @@ class Watering(models.Model):
   # change the default sort
   class Meta:
     ordering = ['-date']
-
-class Pot(models.Model):
-  size = models.CharField('size(in)', max_length=10)
-  color = models.CharField(max_length=20)
-
-  def __str__(self):
-    return self.size
-  
-  def get_absolute_url(self):
-    return reverse('pot-detail', kwargs={"pk": self.id})

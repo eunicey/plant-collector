@@ -32,11 +32,13 @@ def plant_index(request):
 
 def plant_detail(request, plant_id):
   plant = Plant.objects.get(id=plant_id)
+  pots_plant_doesnt_have = Pot.objects.exclude(id__in = plant.pots.all().values_list('id'))
 
   watering_form= WateringForm()
   return render(request, 'plants/detail.html', {
     'plant': plant,
     'watering_form': watering_form,
+    'pots': pots_plant_doesnt_have
   })
 
 def add_watering(request, plant_id):
@@ -49,7 +51,7 @@ def add_watering(request, plant_id):
 
 class PlantCreate(CreateView):
   model = Plant
-  fields = '__all__'
+  fields = ['name', 'type', 'water_needs', 'sun_needs', 'alive']
   success_url = '/plants/'
 
 class PlantUpdate(UpdateView):
@@ -77,3 +79,7 @@ class PotUpdate(UpdateView):
 class PotDelete(DeleteView):
   model = Pot
   success_url = '/pots/'
+
+def assoc_pot(request, plant_id, pot_id):
+  Plant.objects.get(id=plant_id).pots.add(pot_id)
+  return redirect('plant-detail', plant_id=plant_id)
