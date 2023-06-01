@@ -58,20 +58,20 @@
   margin-right: 10px;
 }
 
-.unfed,
-.fed,
+.unwatered,
+.watered,
 .no-soils,
 .all-soils {
   margin: 0;
   font-weight: bold;
 }
 
-.unfed,
+.unwatered,
 .no-soils {
   color: var(--danger);
 }
 
-.fed,
+.watered,
 .all-soils {
   color: var(--submit);
 }
