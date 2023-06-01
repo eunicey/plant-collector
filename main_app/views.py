@@ -1,27 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LoginView
 from .models import Plant, Soil
 from .forms import WateringForm
 
-# class Plant:  # Note that parens are optional if not inheriting from another class
-#   def __init__(self, name, type, water_needs, sun_needs, alive):
-#     self.name = name
-#     self.type = type
-#     self.water_needs = water_needs
-#     self.sun_needs = sun_needs
-#     self.alive = alive
-
-# plants = [
-#   Plant('Aloe', 'succulent', 'low', 'bright', True),
-#   Plant('Birds Nest Fern', 'fern', 'moderate', 'moderate', False),
-#   Plant('Bromeliad', 'monocot flowering', 'low', 'low', True),
-#   Plant('Croton', 'shrub', 'moderate', 'bright', False)
-# ]
-
-# Define the home view
-def home(request):
-  return render(request, 'home.html')
+class Home(LoginView):
+  template_name = 'home.html'
 
 def about(request):
   return render(request, 'about.html')
