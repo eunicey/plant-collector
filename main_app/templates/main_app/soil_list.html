@@ -17,32 +17,36 @@
 </section>
 
 <section class="card-container">
-  {% for soil in soil_list %}
-  <div class="card" style="border-color: brown">
-    <div class="card-bg"></div>
-    
-    <a href="{% url 'soil-detail' soil.id %}">
-      <div class="card-content">
-        <div class="card-img-container">
-          {% if soil.get_type_display == 'Outdoor' %}
-            <img
-              src="{% static 'images/outdoor-planting.png' %}"
-              alt="Plants in the ground with a cultivator tool"
-            >
-          {% else %}
-            <img
-              src="{% static 'images/indoor-planting.png' %}"
-              alt="A potted plant"
-            >
-          {% endif %}
-        </div>
+  {% if not soil_list %}
+    <h1>You have no soil types! Add one ↗ </h1>
+  {% else %}
+    {% for soil in soil_list %}
+    <div class="card" style="border-color: brown">
+      <div class="card-bg"></div>
+      
+      <a href="{% url 'soil-detail' soil.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            {% if soil.get_type_display == 'Outdoor' %}
+              <img
+                src="{% static 'images/outdoor-planting.png' %}"
+                alt="Plants in the ground with a cultivator tool"
+              >
+            {% else %}
+              <img
+                src="{% static 'images/indoor-planting.png' %}"
+                alt="A potted plant"
+              >
+            {% endif %}
+          </div>
 
-        <h2>{{ soil.mixture }}</h2>
-        <p>{{ soil.get_type_display }} soil</p>
-      </div>
-    </a>
-  </div>
-  {% endfor %}
+          <h2>{{ soil.mixture }}</h2>
+          <p>{{ soil.get_type_display }} soil</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  {% endif %}
 </section>
 
 {% endblock %}

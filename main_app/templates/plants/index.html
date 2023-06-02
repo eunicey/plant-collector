@@ -17,28 +17,32 @@
 </section>
 
 <section class="card-container">
-  {% for plant in plants %}
-    <div class="card">
-      <a href="{% url 'plant-detail' plant.id %}">
-        <div class="card-content">
-          <div class="card-img-container {% if not plant.alive %}dead-plant{% endif %}">
-            <img
-              src="{% static 'images/'%}{{plant.get_size_display}}-plant.png" 
-              alt="A {{plant.get_size_display}} plant"
-            >
+  {% if not plants %}
+    <h1>You have no plants! Add a plant ↗ </h1>
+  {% else %}
+    {% for plant in plants %}
+      <div class="card">
+        <a href="{% url 'plant-detail' plant.id %}">
+          <div class="card-content">
+            <div class="card-img-container {% if not plant.alive %}dead-plant{% endif %}">
+              <img
+                src="{% static 'images/'%}{{plant.get_size_display}}-plant.png" 
+                alt="A {{plant.get_size_display}} plant"
+              >
+            </div>
+          
+            {% if plant.alive %}
+              <h2 class="card-title">{{ plant.name }} </h2>
+              <p>A {{ plant.get_size_display }} plant that needs {{ plant.get_water_needs_display }} 💦 and {{ plant.get_sun_needs_display }} ☀️</p>
+            {% else %}
+              <h2 class="card-title">{{ plant.name }} 🪦 </h2>
+              <p>A {{ plant.get_size_display }} plant that needed {{ plant.get_water_needs_display }} 💦 and {{ plant.get_sun_needs_display }} ☀️</p>
+            {% endif %}
           </div>
-        
-          {% if plant.alive %}
-            <h2 class="card-title">{{ plant.name }} </h2>
-            <p>A {{ plant.get_size_display }} plant that needs {{ plant.get_water_needs_display }} 💦 and {{ plant.get_sun_needs_display }} ☀️</p>
-          {% else %}
-            <h2 class="card-title">{{ plant.name }} 🪦 </h2>
-            <p>A {{ plant.get_size_display }} plant that needed {{ plant.get_water_needs_display }} 💦 and {{ plant.get_sun_needs_display }} ☀️</p>
-          {% endif %}
-        </div>
-      </a>
-    </div>
-  {% endfor %}
+        </a>
+      </div>
+    {% endfor %}
+  {% endif %}
 </section>
 
 {% endblock %}
